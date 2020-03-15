@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1087386892499",
+    "firebase_url": "https://insight-security-269921.firebaseio.com",
+    "project_id": "insight-security-269921",
+    "storage_bucket": "insight-security-269921.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1087386892499:android:8ca4f86f4ccddb72e3fc26",
+        "android_client_info": {
+          "package_name": "com.example.googlelogin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1087386892499-chfdv5ot3v394og73siid5jmv6bk3999.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.googlelogin",
+            "certificate_hash": "0f12f6dea5d2c325fb5585bc2e30b416d9e7da76"
+          }
+        },
+        {
+          "client_id": "1087386892499-di1gg6aq41euad6bfo59qog01jcs0i6i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0_0Ngjh8J6YbGj_mODEGCGDKjPcZB6v8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1087386892499-di1gg6aq41euad6bfo59qog01jcs0i6i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

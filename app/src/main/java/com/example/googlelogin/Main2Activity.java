@@ -19,6 +19,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class Main2Activity extends AppCompatActivity {
 
@@ -94,7 +95,6 @@ public class Main2Activity extends AppCompatActivity {
                     // ...
                     case R.id.signOut:
                         signOut();
-                        revokeAccess();
                         break;
                     // ...
                 }
@@ -109,28 +109,12 @@ public class Main2Activity extends AppCompatActivity {
 
     //sign out function
     private void signOut() {
-        mGoogleSignInClient.signOut()
-                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        Toast.makeText(Main2Activity.this, "Signed Out", Toast.LENGTH_LONG).show();
-                        finish();
-                    }
-                });
-
-
+        FirebaseAuth.getInstance().signOut();
+        mGoogleSignInClient.signOut();
+        Intent viewerIntent = new Intent(Main2Activity.this, MainActivity.class);
+        startActivity(viewerIntent);
     }
 
-
-    private void revokeAccess() {
-        mGoogleSignInClient.revokeAccess()
-                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        // ...
-                    }
-                });
-    }
 
 
 
