@@ -20,11 +20,14 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class Main2Activity extends AppCompatActivity {
 
     Button viewButton, camButton, signOut;
     GoogleSignInClient mGoogleSignInClient;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +37,6 @@ public class Main2Activity extends AppCompatActivity {
         viewButton = findViewById(R.id.theViewer);
         camButton = findViewById(R.id.theCamera);
         signOut = findViewById(R.id.signOut);
-
-
-
 
 
 
@@ -114,20 +114,6 @@ public class Main2Activity extends AppCompatActivity {
         Intent viewerIntent = new Intent(Main2Activity.this, MainActivity.class);
         startActivity(viewerIntent);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -25,6 +25,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,6 +40,9 @@ public class MainActivity extends AppCompatActivity {
      private String TAG = "MainActivity";
      private FirebaseAuth mAuth;
     private int RC_SIGN_IN = 0;
+
+    //database object
+    DatabaseReference databaseUsers;
 
 
 
@@ -61,7 +66,8 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
+    //database reference
+        databaseUsers = FirebaseDatabase.getInstance().getReference("Users");
 
 
 
@@ -211,7 +217,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
+    private void firebaseAuthWithGoogle(final GoogleSignInAccount acct) {
         //Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
 
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
@@ -223,6 +229,20 @@ public class MainActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Toast.makeText(MainActivity.this, "You Signed In", Toast.LENGTH_SHORT).show();
                             FirebaseUser user = mAuth.getCurrentUser();
+
+                            //add to database
+                            String databaseID = databaseUsers.push().getKey();
+                            String authenicationID = user.getUid();
+                            String userName = user.getDisplayName();
+                            String userEmail = user.getEmail();
+                            Boolean NoiseEvent = false;
+                            String notificationToken = "N/A";
+                            Users newUser = new Users (databaseID,authenicationID,userName,userEmail,NoiseEvent, notificationToken);
+                            databaseUsers.child(databaseID).setValue(newUser);
+
+
+
+
                             updateUI(user);
                         }
                         else {
