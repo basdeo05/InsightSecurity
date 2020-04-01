@@ -45,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
 
     //database object
     DatabaseReference databaseUsers;
+    //Database ID to signout
+    String theDataBaseIDSignOUt;
 
 
 
@@ -234,6 +236,7 @@ public class MainActivity extends AppCompatActivity {
 
                             //add to database
                             final String databaseID = databaseUsers.push().getKey();
+                            theDataBaseIDSignOUt = databaseID;
                             final String authenicationID = user.getUid();
                             final String userName = user.getDisplayName();
                             final String userEmail = user.getEmail();
@@ -284,7 +287,9 @@ public class MainActivity extends AppCompatActivity {
     protected void updateUI(FirebaseUser account) {
 
         if (account != null) {
-            startActivity(new Intent(MainActivity.this, Main2Activity.class));
+            Intent afterLogin = new Intent(this, Main2Activity.class);
+            afterLogin.putExtra("key",theDataBaseIDSignOUt);
+            startActivity(afterLogin);
         }
     }
 
