@@ -27,6 +27,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -231,17 +233,28 @@ public class MainActivity extends AppCompatActivity {
                             FirebaseUser user = mAuth.getCurrentUser();
 
                             //add to database
-                            String databaseID = databaseUsers.push().getKey();
-                            String authenicationID = user.getUid();
-                            String userName = user.getDisplayName();
-                            String userEmail = user.getEmail();
-                            Boolean NoiseEvent = false;
-                            String notificationToken = "N/A";
-                            Users newUser = new Users (databaseID,authenicationID,userName,userEmail,NoiseEvent, notificationToken);
-                            databaseUsers.child(databaseID).setValue(newUser);
+                            final String databaseID = databaseUsers.push().getKey();
+                            final String authenicationID = user.getUid();
+                            final String userName = user.getDisplayName();
+                            final String userEmail = user.getEmail();
+                            final Boolean NoiseEvent = false;
 
+                            //get notification token
+                            FirebaseInstanceId.getInstance().getInstanceId()
+                                    .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                                            if (!task.isSuccessful()) {
+                                                Log.w(TAG, "getInstanceId failed", task.getException());
+                                                return;
+                                            }
 
-
+                                            // Get new Instance ID token
+                                            String notificationToken = task.getResult().getToken();
+                                            Users newUser = new Users (databaseID,authenicationID,userName,userEmail,NoiseEvent, notificationToken);
+                                            databaseUsers.child(databaseID).setValue(newUser);
+                                        }
+                                    });
 
                             updateUI(user);
                         }
