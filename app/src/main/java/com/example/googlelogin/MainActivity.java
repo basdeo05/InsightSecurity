@@ -237,10 +237,10 @@ public class MainActivity extends AppCompatActivity {
                             //add to database
                             final String databaseID = databaseUsers.push().getKey();
                             theDataBaseIDSignOUt = databaseID;
-                            final String authenicationID = user.getUid();
-                            final String userName = user.getDisplayName();
                             final String userEmail = user.getEmail();
                             final Boolean NoiseEvent = false;
+                            final Boolean notified = false;
+                            final String name = user.getDisplayName();
 
                             //get notification token
                             FirebaseInstanceId.getInstance().getInstanceId()
@@ -254,7 +254,7 @@ public class MainActivity extends AppCompatActivity {
 
                                             // Get new Instance ID token
                                             String notificationToken = task.getResult().getToken();
-                                            Users newUser = new Users (databaseID,authenicationID,userName,userEmail,NoiseEvent, notificationToken);
+                                            Users newUser = new Users (userEmail, NoiseEvent, notificationToken, notified, name);
                                             databaseUsers.child(databaseID).setValue(newUser);
                                         }
                                     });

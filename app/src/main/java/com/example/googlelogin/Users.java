@@ -2,38 +2,22 @@ package com.example.googlelogin;
 
 public class Users {
 
-    String databaseID;
-    String authenicationID;
-    String userName;
     String userEmail;
     Boolean NoiseEvent = false;
     String notificationToken;
+    Boolean notified = false;
+    String userName;
 
     public  Users(){
 
     }
 
-    //parametrize constructor
-
-    public Users(String databaseID, String authenicationID, String userName, String userEmail, Boolean noiseEvent, String notificationToken) {
-        this.databaseID = databaseID;
-        this.authenicationID = authenicationID;
-        this.userName = userName;
+    public Users(String userEmail, Boolean noiseEvent, String notificationToken, Boolean notified, String userName) {
         this.userEmail = userEmail;
         NoiseEvent = noiseEvent;
         this.notificationToken = notificationToken;
-    }
-
-    public String getDatabaseID() {
-        return databaseID;
-    }
-
-    public String getAuthenicationID() {
-        return authenicationID;
-    }
-
-    public String getUserName() {
-        return userName;
+        this.notified = notified;
+        this.userName = userName;
     }
 
     public String getUserEmail() {
@@ -46,5 +30,13 @@ public class Users {
 
     public String getNotificationToken() {
         return notificationToken;
+    }
+
+    public Boolean getNotified() {
+        return notified;
+    }
+
+    public String getUserName() {
+        return userName;
     }
 }
