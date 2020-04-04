@@ -29,7 +29,6 @@ public class Main4Activity extends AppCompatActivity {
     Thread runner;
     private static double mEMA = 0.0;
     static final private double EMA_FILTER = 0.6;
-    private double referenceAmp = 10;
 
     final Runnable updater = new Runnable(){
 
@@ -161,14 +160,11 @@ public class Main4Activity extends AppCompatActivity {
     }
 
     public void updateTv(){
-        //mStatusView.setText(Double.toString((soundDb(referenceAmp))) + " dB");
-        mStatusView.setText( String.format("%.1f", soundDb(referenceAmp))+ " dB");
-
+        mStatusView.setText(Double.toString((getAmplitudeEMA())) + " dB");
     }
     public double soundDb(double ampl){
-        return  20 * Math.log10(getAmplitude() / ampl);
+        return  20 * Math.log10(getAmplitudeEMA() / ampl);
     }
-
     public double getAmplitude() {
         if (mRecorder != null)
             return  (mRecorder.getMaxAmplitude());
@@ -176,14 +172,14 @@ public class Main4Activity extends AppCompatActivity {
             return 0;
 
     }
-/*    public double getAmplitudeEMA() {
+    public double getAmplitudeEMA() {
         double amp =  getAmplitude();
         mEMA = EMA_FILTER * amp + (1.0 - EMA_FILTER) * mEMA;
         if(mEMA <=1){
             mEMA = 0.0;
         }
         return mEMA;
-    }*/
+    }
 
 }
 

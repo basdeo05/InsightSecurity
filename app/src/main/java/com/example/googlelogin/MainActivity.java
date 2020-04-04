@@ -25,6 +25,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,6 +42,11 @@ public class MainActivity extends AppCompatActivity {
      private String TAG = "MainActivity";
      private FirebaseAuth mAuth;
     private int RC_SIGN_IN = 0;
+
+    //database object
+    DatabaseReference databaseUsers;
+    //Database ID to signout
+    String theDataBaseIDSignOUt;
 
 
 
@@ -61,7 +70,8 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
+    //database reference
+        databaseUsers = FirebaseDatabase.getInstance().getReference("Users");
 
 
 
@@ -211,7 +221,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
+    private void firebaseAuthWithGoogle(final GoogleSignInAccount acct) {
         //Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
 
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
@@ -223,6 +233,32 @@ public class MainActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Toast.makeText(MainActivity.this, "You Signed In", Toast.LENGTH_SHORT).show();
                             FirebaseUser user = mAuth.getCurrentUser();
+
+                            //add to database
+                            final String databaseID = databaseUsers.push().getKey();
+                            theDataBaseIDSignOUt = databaseID;
+                            final String userEmail = user.getEmail();
+                            final Boolean NoiseEvent = false;
+                            final Boolean notified = false;
+                            final String name = user.getDisplayName();
+
+                            //get notification token
+                            FirebaseInstanceId.getInstance().getInstanceId()
+                                    .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                                            if (!task.isSuccessful()) {
+                                                Log.w(TAG, "getInstanceId failed", task.getException());
+                                                return;
+                                            }
+
+                                            // Get new Instance ID token
+                                            String notificationToken = task.getResult().getToken();
+                                            Users newUser = new Users (userEmail, NoiseEvent, notificationToken, notified, name);
+                                            databaseUsers.child(databaseID).setValue(newUser);
+                                        }
+                                    });
+
                             updateUI(user);
                         }
                         else {
@@ -251,7 +287,9 @@ public class MainActivity extends AppCompatActivity {
     protected void updateUI(FirebaseUser account) {
 
         if (account != null) {
-            startActivity(new Intent(MainActivity.this, Main2Activity.class));
+            Intent afterLogin = new Intent(this, Main2Activity.class);
+            afterLogin.putExtra("key",theDataBaseIDSignOUt);
+            startActivity(afterLogin);
         }
     }
 

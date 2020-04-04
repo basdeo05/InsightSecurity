@@ -20,11 +20,15 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class Main2Activity extends AppCompatActivity {
 
     Button viewButton, camButton, signOut;
     GoogleSignInClient mGoogleSignInClient;
+    //child ID to delete user from database once they sign out
+    String theChildID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +39,11 @@ public class Main2Activity extends AppCompatActivity {
         camButton = findViewById(R.id.theCamera);
         signOut = findViewById(R.id.signOut);
 
-
+        //get child id to delete user from database once signed out
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            theChildID = extras.getString("key");
+        }
 
 
 
@@ -109,25 +117,16 @@ public class Main2Activity extends AppCompatActivity {
 
     //sign out function
     private void signOut() {
+        //get data base refrence using child id
+        DatabaseReference theUser = FirebaseDatabase.getInstance().getReference("Users").child(theChildID);
+        //delete child from database
+        theUser.removeValue();
+        
         FirebaseAuth.getInstance().signOut();
         mGoogleSignInClient.signOut();
         Intent viewerIntent = new Intent(Main2Activity.this, MainActivity.class);
         startActivity(viewerIntent);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
