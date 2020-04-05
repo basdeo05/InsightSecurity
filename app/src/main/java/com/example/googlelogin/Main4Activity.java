@@ -24,12 +24,19 @@ public class Main4Activity extends AppCompatActivity {
     //variables
     private Button theButton;
     private TextView theTitle;
-    TextView mStatusView;
-    MediaRecorder mRecorder;
-    Thread runner;
-    private static double mEMA = 0.0;
-    static final private double EMA_FILTER = 0.6;
-    private double referenceAmp = 10;
+    private TextView mStatusView;
+    private MediaRecorder mRecorder;
+    private Thread runner;
+    private TextView dBAverage;
+    private TextView spike;
+    private final int SIZE_OF_DB_ARRAY = 300; //300 is to test for a minute //1500; // For recording 5 times a second * 60 seconds * 5 minutes
+    private double[] dbArray = new double[SIZE_OF_DB_ARRAY];
+    private double avgOfDbArray = 0.0;
+    private double referenceAmp = 10.0;
+    private int dbArrayIterator;
+
+    public boolean noiseSpike = false;
+
 
     final Runnable updater = new Runnable(){
 
@@ -48,6 +55,8 @@ public class Main4Activity extends AppCompatActivity {
         theButton = findViewById(R.id.theButton);
         theTitle = findViewById(R.id.title);
         mStatusView = (TextView)findViewById(R.id.status);
+        dBAverage = (TextView)findViewById(R.id.average);
+        spike = (TextView)findViewById(R.id.spike);
 
 
         //when click change text view and start and stop recording
@@ -67,6 +76,7 @@ public class Main4Activity extends AppCompatActivity {
                     theButton.setText("Stop Listening");
                     //call the on start method
                     onResume();
+
 
                 }
                 else {
@@ -111,6 +121,7 @@ public class Main4Activity extends AppCompatActivity {
 
         else {
             startRecorder();
+            checkForNoiseSpike();
         }
 
     }
@@ -148,7 +159,6 @@ public class Main4Activity extends AppCompatActivity {
                         android.util.Log.getStackTraceString(e));
             }
 
-            //mEMA = 0.0;
         }
 
     }
@@ -162,15 +172,55 @@ public class Main4Activity extends AppCompatActivity {
 
     public void updateTv(){
         //mStatusView.setText(Double.toString((soundDb(referenceAmp))) + " dB");
-        mStatusView.setText( String.format("%.1f", soundDb(referenceAmp))+ " dB");
+        mStatusView.setText( "Current Level: " + String.format("%.1f", soundDb())+ " dB");
+        dBAverage.setText("Average:" + String.format("%.1f", avgOfDbArray)+ " dB");
+        if (noiseSpike == true){
+            spike.setText("true");
+        }
+        else spike.setText("false");
+    }
 
-    }
-    public double soundDb(double ampl){
-        /*double db_as_double = 20 * Math.log10(getAmplitude() / ampl);*/
+  /*  public double soundDb(double ampl){
         return  20 * Math.log10(getAmplitude() / ampl);
-        /*int db_int = (int) Math.round(db_as_double);
-        return db_int;*/
+    }*/
+
+    public double soundDb(){
+        return  20 * Math.log10(getAmplitude() / referenceAmp);
     }
+
+    public int setDbAverage(){
+        int itr = 0;
+        double total = 0.0;
+
+        if(soundDb() > 0) { //since the app says the dB level is -infinity when it first runs
+            for (/*itr = 0*/; itr < dbArray.length; itr++) {
+                dbArray[itr] = soundDb();
+                total += dbArray[itr];
+            }
+        }
+
+        if (itr == dbArray.length-1) {
+            avgOfDbArray = total / dbArray.length;
+        }
+
+        return itr;
+    }
+
+/*    public void checkForNoiseSpike(){
+        dbArrayIterator= setDbAverage();
+        if ( (dbArrayIterator == dbArray.length-1) && (soundDb() > avgOfDbArray)){
+            //trigger noise event
+            noiseSpike = true;
+            //reset the boolean after sending a notification
+        }
+    }*/
+
+    public void checkForNoiseSpike(){
+       if(soundDb() > 60.0){
+           noiseSpike = true;
+       }
+    }
+
     public double getAmplitude() {
         if (mRecorder != null)
             return  (mRecorder.getMaxAmplitude());
@@ -178,14 +228,6 @@ public class Main4Activity extends AppCompatActivity {
             return 0;
 
     }
-/*    public double getAmplitudeEMA() {
-        double amp =  getAmplitude();
-        mEMA = EMA_FILTER * amp + (1.0 - EMA_FILTER) * mEMA;
-        if(mEMA <=1){
-            mEMA = 0.0;
-        }
-        return mEMA;
-    }*/
 
 }
 

@@ -30,14 +30,41 @@
 
     <TextView
         android:id="@+id/status"
-        android:layout_width="211dp"
-        android:layout_height="47dp"
+        android:layout_width="253dp"
+        android:layout_height="51dp"
         android:layout_marginTop="266dp"
         android:text="TextView"
+        android:textAlignment="center"
         android:textColor="@color/common_google_signin_btn_text_dark_focused"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/title" />
+
+    <TextView
+        android:id="@+id/average"
+        android:layout_width="102dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="183dp"
+        android:layout_marginBottom="71dp"
+        android:text="TextView"
+        android:textAlignment="center"
+        android:textColor="@color/common_google_signin_btn_text_dark_focused"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/theButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
+
+    <TextView
+        android:id="@+id/spike"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="82dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/average"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
 </androidx.constraintlayout.widget.ConstraintLayout>
