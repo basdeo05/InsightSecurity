@@ -121,7 +121,7 @@ public class Main4Activity extends AppCompatActivity {
 
         else {
             startRecorder();
-            checkForNoiseSpike();
+
         }
 
     }
@@ -174,6 +174,7 @@ public class Main4Activity extends AppCompatActivity {
         //mStatusView.setText(Double.toString((soundDb(referenceAmp))) + " dB");
         mStatusView.setText( "Current Level: " + String.format("%.1f", soundDb())+ " dB");
         dBAverage.setText("Average:" + String.format("%.1f", avgOfDbArray)+ " dB");
+        checkForNoiseSpike();
         if (noiseSpike == true){
             spike.setText("true");
         }
