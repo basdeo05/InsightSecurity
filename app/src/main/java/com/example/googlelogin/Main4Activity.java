@@ -176,9 +176,9 @@ public class Main4Activity extends AppCompatActivity {
         dBAverage.setText("Average:" + String.format("%.1f", avgOfDbArray)+ " dB");
         checkForNoiseSpike();
         if (noiseSpike == true){
-            spike.setText("true");
+            spike.setText("Noise spike: true");
         }
-        else spike.setText("false");
+        else spike.setText("Noise spike: false");
     }
 
   /*  public double soundDb(double ampl){
