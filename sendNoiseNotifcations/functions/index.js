@@ -23,7 +23,8 @@ exports.sendSoundNotification = functions.database.ref('/Users/{userId}/{noiseEv
         const notified = admin.database().ref(`/Users/${userId}/notified`).once("value");
         const notifiedResults = await notified;
         if (notifiedResults.val() === true) {
-            return console.log('User ' + userId + ' has already been notified');
+            admin.database().ref(`/Users/${userId}/noiseEvent`).set(false)
+            return console.log('This user ' + userId + ' has already been notified.');
         }
 
         // Otherwise, continue and log the noise event
@@ -52,9 +53,9 @@ exports.sendSoundNotification = functions.database.ref('/Users/{userId}/{noiseEv
             admin.database().ref(`/Users/${item}/noiseEvent`).set(true)
         }
 
-        // Set this user's notified to true 
-        // ERIC NOTE TO SELF SET NOISE EVENT FALSE HERE LATER
+        // Set this user's notified to true , noiseEvent to false
         admin.database().ref(`/Users/${userId}/notified`).set(true)
+        admin.database().ref(`/Users/${userId}/noiseEvent`).set(false)
 
         // Get the list of device notification tokens
         const getDeviceTokensPromise = admin.database().ref(`/Users/${userId}/notificationToken`).once("value");
