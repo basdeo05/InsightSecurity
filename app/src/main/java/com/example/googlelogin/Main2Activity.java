@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -84,6 +85,8 @@ public class Main2Activity extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent viewerIntent = new Intent(Main2Activity.this, Main4Activity.class);
+                // pass the user id key in to camera page
+                viewerIntent.putExtra("key2",theChildID);
                 startActivity(viewerIntent);
 
 
@@ -126,6 +129,7 @@ public class Main2Activity extends AppCompatActivity {
         mGoogleSignInClient.signOut();
         Intent viewerIntent = new Intent(Main2Activity.this, MainActivity.class);
         startActivity(viewerIntent);
+
     }
 
 

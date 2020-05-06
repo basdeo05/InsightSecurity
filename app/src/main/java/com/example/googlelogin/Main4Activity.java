@@ -18,6 +18,9 @@ import android.content.pm.PackageManager;
 import android.os.Handler;
 import android.util.Log;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 
 public class Main4Activity extends AppCompatActivity {
 
@@ -36,7 +39,7 @@ public class Main4Activity extends AppCompatActivity {
     private int dbArrayIterator;
 
     public boolean noiseSpike = false;
-
+    String theChildID;
 
     final Runnable updater = new Runnable(){
 
@@ -57,6 +60,15 @@ public class Main4Activity extends AppCompatActivity {
         mStatusView = (TextView)findViewById(R.id.status);
         dBAverage = (TextView)findViewById(R.id.average);
         spike = (TextView)findViewById(R.id.spike);
+
+        //get child id to notify user once noise event
+        Bundle extras = getIntent().getExtras();
+
+        if (extras != null) {
+            theChildID = extras.getString("key2");
+            // make sure child id was grabbed and not null
+            Log.d("myTag", theChildID);
+        }
 
 
         //when click change text view and start and stop recording
@@ -219,6 +231,12 @@ public class Main4Activity extends AppCompatActivity {
     public void checkForNoiseSpike(){
        if(soundDb() > 60.0){
            noiseSpike = true;
+           //get data base refrence using child id
+           DatabaseReference theUserNoiseEventValue = FirebaseDatabase.getInstance().getReference("Users").child(theChildID).child("noiseEvent");
+           //update child from database
+           theUserNoiseEventValue.setValue(true);
+       } else {
+           noiseSpike = false;
        }
     }
 
