@@ -68,6 +68,7 @@ public class Main2Activity extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent viewerIntent = new Intent(Main2Activity.this, Main3Activity.class);
+                viewerIntent.putExtra("key3",theChildID);
                 startActivity(viewerIntent);
 
             }
