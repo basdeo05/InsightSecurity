@@ -26,9 +26,8 @@ public class ImagesActivity extends AppCompatActivity {
     private ProgressBar mProgressCircle;
     private DatabaseReference mDatabaseRef;
     private List<Upload> mUploads;
-    String theChildID;
     String theUserEmail;
-    
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,27 +36,10 @@ public class ImagesActivity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            theChildID = extras.getString("key4");
+            theUserEmail = extras.getString("email");
         }
 
-        DatabaseReference userEmail = FirebaseDatabase.getInstance().getReference("Users").child(theChildID);
-
-        userEmail.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                theUserEmail = dataSnapshot.child("userEmail").getValue().toString();
-                Toast.makeText(ImagesActivity.this, theUserEmail,Toast.LENGTH_SHORT).show();
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-
+        Toast.makeText(this, theUserEmail, Toast.LENGTH_SHORT).show();
 
 
         mRecyclerView = findViewById(R.id.recycler_view);
@@ -75,7 +57,13 @@ public class ImagesActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     Upload upload = postSnapshot.getValue(Upload.class);
+
+                    if (upload.getName().equals(theUserEmail)){
                         mUploads.add(upload);
+                    }
+
+
+
 
                 }
 

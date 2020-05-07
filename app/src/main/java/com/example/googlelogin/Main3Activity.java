@@ -44,7 +44,7 @@ public class Main3Activity extends AppCompatActivity {
     private ProgressBar mProgressBar;
 
     private Uri mImageUri;
-    String theChildID;
+    String universal;
 
 
     private StorageReference mStorageRef;
@@ -60,9 +60,9 @@ public class Main3Activity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            theChildID = extras.getString("key3");
+            universal = extras.getString("email");
             // make sure child id was grabbed and not null
-            Toast.makeText(Main3Activity.this, theChildID,Toast.LENGTH_SHORT).show();
+            Toast.makeText(Main3Activity.this, universal,Toast.LENGTH_SHORT).show();
         }
 
 
@@ -195,7 +195,7 @@ public class Main3Activity extends AppCompatActivity {
 
         Intent viewerIntent = new Intent(this, ImagesActivity.class);
         // pass the user id key in to camera page
-        viewerIntent.putExtra("key4",theChildID);
+        viewerIntent.putExtra("email",universal);
         startActivity(viewerIntent);
 
     }

@@ -30,6 +30,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 
+import java.io.Serializable;
+
 public class MainActivity extends AppCompatActivity {
 
 
@@ -47,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
     DatabaseReference databaseUsers;
     //Database ID to signout
     String theDataBaseIDSignOUt;
+    String universal;
 
 
 
@@ -238,6 +241,7 @@ public class MainActivity extends AppCompatActivity {
                             final String databaseID = databaseUsers.push().getKey();
                             theDataBaseIDSignOUt = databaseID;
                             final String userEmail = user.getEmail();
+                            universal = userEmail;
                             final Boolean NoiseEvent = false;
                             final Boolean notified = false;
                             final String name = user.getDisplayName();
@@ -289,6 +293,7 @@ public class MainActivity extends AppCompatActivity {
         if (account != null) {
             Intent afterLogin = new Intent(this, Main2Activity.class);
             afterLogin.putExtra("key",theDataBaseIDSignOUt);
+            afterLogin.putExtra("email", universal);
             startActivity(afterLogin);
         }
     }

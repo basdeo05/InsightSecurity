@@ -24,12 +24,15 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.io.Serializable;
+
 public class Main2Activity extends AppCompatActivity {
 
     Button viewButton, camButton, signOut;
     GoogleSignInClient mGoogleSignInClient;
     //child ID to delete user from database once they sign out
     String theChildID;
+    String universal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +47,16 @@ public class Main2Activity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             theChildID = extras.getString("key");
+            universal = extras.getString("email");
         }
+
+        Toast.makeText(Main2Activity.this, universal ,Toast.LENGTH_SHORT).show();
+        Toast.makeText(Main2Activity.this, theChildID ,Toast.LENGTH_SHORT).show();
+
+
+
+
+
 
 
 
@@ -68,7 +80,7 @@ public class Main2Activity extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent viewerIntent = new Intent(Main2Activity.this, Main3Activity.class);
-                viewerIntent.putExtra("key3",theChildID);
+                viewerIntent.putExtra("email",universal);
                 startActivity(viewerIntent);
 
             }
@@ -89,6 +101,7 @@ public class Main2Activity extends AppCompatActivity {
                 // pass the user id key in to camera page
                 viewerIntent.putExtra("key2",theChildID);
                 startActivity(viewerIntent);
+
 
 
             }
