@@ -39,7 +39,6 @@ public class Main3Activity extends AppCompatActivity {
     private Button mButtonChooseImage;
     private Button mButtonUpload;
     private TextView mTextViewShowUploads;
-    private EditText mEditTextFileName;
     private ImageView mImageView;
     private ProgressBar mProgressBar;
 
@@ -70,7 +69,6 @@ public class Main3Activity extends AppCompatActivity {
         mButtonChooseImage = findViewById(R.id.button_choose_image);
         mButtonUpload = findViewById(R.id.button_upload);
         mTextViewShowUploads = findViewById(R.id.text_view_show_uploads);
-        mEditTextFileName = findViewById(R.id.edit_text_file_name);
         mImageView = findViewById(R.id.image_view);
         mProgressBar = findViewById(R.id.progress_bar);
 
@@ -165,7 +163,7 @@ public class Main3Activity extends AppCompatActivity {
                             while (!urlTask.isSuccessful());
                             Uri downloadUrl = urlTask.getResult();
 
-                            Upload upload = new Upload(mEditTextFileName.getText().toString().trim(),downloadUrl.toString());
+                            Upload upload = new Upload(universal,downloadUrl.toString());
 
                             String uploadId = mDatabaseRef.push().getKey();
                             mDatabaseRef.child(uploadId).setValue(upload);
@@ -199,5 +197,4 @@ public class Main3Activity extends AppCompatActivity {
         startActivity(viewerIntent);
 
     }
-
 }
