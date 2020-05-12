@@ -41,7 +41,6 @@ public class takePictureActivity extends AppCompatActivity {
         mCaptureBtn = findViewById(R.id.theButton);
 
 
-
         //get child id to notify user once noise event
         Bundle extras = getIntent().getExtras();
 
@@ -53,32 +52,23 @@ public class takePictureActivity extends AppCompatActivity {
         }
 
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            if (checkSelfPermission(Manifest.permission.CAMERA) ==
+                    PackageManager.PERMISSION_DENIED || checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) ==
+                    PackageManager.PERMISSION_DENIED){
 
-        mCaptureBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-                    if (checkSelfPermission(Manifest.permission.CAMERA) ==
-                            PackageManager.PERMISSION_DENIED || checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) ==
-                            PackageManager.PERMISSION_DENIED){
+                String[] permission = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
-                        String[] permission = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
-
-                        requestPermissions(permission, PERMISSION_CODE);
+                requestPermissions(permission, PERMISSION_CODE);
 
                     }
                     else{
                         openCamera();
-
                     }
                 }
-                else{
-
-                    openCamera();
-
-                }
-            }
-        });
+        else{
+            openCamera();
+        }
     }
 
     private void openCamera() {
@@ -91,8 +81,6 @@ public class takePictureActivity extends AppCompatActivity {
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, image_uri);
         startActivityForResult(cameraIntent, IMAGE_CAPTURE_CODE);
-
-
 
     }
 
