@@ -80,7 +80,7 @@ public class Main2Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent viewerIntent = new Intent(Main2Activity.this, Main3Activity.class);
+                Intent viewerIntent = new Intent(Main2Activity.this, ImagesActivity.class);
                 viewerIntent.putExtra("email",universal);
                 startActivity(viewerIntent);
 
@@ -101,6 +101,7 @@ public class Main2Activity extends AppCompatActivity {
                 Intent viewerIntent = new Intent(Main2Activity.this, Main4Activity.class);
                 // pass the user id key in to camera page
                 viewerIntent.putExtra("key2",theChildID);
+                viewerIntent.putExtra("key3",universal);
                 startActivity(viewerIntent);
 
 
@@ -112,6 +113,7 @@ public class Main2Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent newIntet = new Intent(Main2Activity.this, takePictureActivity.class);
+                newIntet.putExtra("key3",universal);
                 startActivity(newIntet);
             }
         });

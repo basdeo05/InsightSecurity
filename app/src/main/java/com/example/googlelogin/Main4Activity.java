@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -40,6 +41,7 @@ public class Main4Activity extends AppCompatActivity {
 
     public boolean noiseSpike = false;
     String theChildID;
+    String universal;
 
     final Runnable updater = new Runnable(){
 
@@ -66,8 +68,10 @@ public class Main4Activity extends AppCompatActivity {
 
         if (extras != null) {
             theChildID = extras.getString("key2");
+            universal = extras.getString("key3");
             // make sure child id was grabbed and not null
-            Log.d("myTag", theChildID);
+            Toast.makeText(Main4Activity.this, universal ,Toast.LENGTH_SHORT).show();
+            Toast.makeText(Main4Activity.this, theChildID ,Toast.LENGTH_SHORT).show();
         }
 
 
@@ -235,6 +239,14 @@ public class Main4Activity extends AppCompatActivity {
            DatabaseReference theUserNoiseEventValue = FirebaseDatabase.getInstance().getReference("Users").child(theChildID).child("noiseEvent");
            //update child from database
            theUserNoiseEventValue.setValue(true);
+
+           Intent viewerIntent = new Intent(Main4Activity.this, takePictureActivity.class);
+           // pass the user id key in to camera page
+           viewerIntent.putExtra("key2",theChildID);
+           viewerIntent.putExtra("key3",universal);
+           startActivity(viewerIntent);
+
+
        } else {
            noiseSpike = false;
        }

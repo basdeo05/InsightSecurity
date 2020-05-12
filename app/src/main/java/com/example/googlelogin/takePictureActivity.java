@@ -25,6 +25,8 @@ public class takePictureActivity extends AppCompatActivity {
     Button mCaptureBtn;
     ImageView mImageView;
     Uri image_uri;
+    String universal;
+    String childID;
 
 
 
@@ -37,6 +39,18 @@ public class takePictureActivity extends AppCompatActivity {
 
         mImageView = findViewById(R.id.aImage);
         mCaptureBtn = findViewById(R.id.theButton);
+
+
+
+        //get child id to notify user once noise event
+        Bundle extras = getIntent().getExtras();
+
+        if (extras != null) {
+            childID = extras.getString("key2");
+            universal = extras.getString("key3");
+            // make sure child id was grabbed and not null
+            Toast.makeText(takePictureActivity.this, universal ,Toast.LENGTH_SHORT).show();
+        }
 
 
 
@@ -108,6 +122,15 @@ public class takePictureActivity extends AppCompatActivity {
 
             mImageView.setImageURI(image_uri);
         }
+
+        Intent viewerIntent = new Intent(takePictureActivity.this, Main3Activity.class);
+        // pass the user id key in to camera page
+        viewerIntent.putExtra("key2",image_uri.toString());
+        viewerIntent.putExtra("key3",universal);
+        viewerIntent.putExtra("key4", childID);
+        startActivity(viewerIntent);
+
+
 
     }
 }
