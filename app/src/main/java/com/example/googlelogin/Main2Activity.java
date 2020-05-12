@@ -28,7 +28,7 @@ import java.io.Serializable;
 
 public class Main2Activity extends AppCompatActivity {
 
-    Button viewButton, camButton, signOut;
+    Button viewButton, camButton, signOut, picButton;
     GoogleSignInClient mGoogleSignInClient;
     //child ID to delete user from database once they sign out
     String theChildID;
@@ -42,6 +42,7 @@ public class Main2Activity extends AppCompatActivity {
         viewButton = findViewById(R.id.theViewer);
         camButton = findViewById(R.id.theCamera);
         signOut = findViewById(R.id.signOut);
+        picButton = findViewById(R.id.pictureButton);
 
         //get child id to delete user from database once signed out
         Bundle extras = getIntent().getExtras();
@@ -104,6 +105,14 @@ public class Main2Activity extends AppCompatActivity {
 
 
 
+            }
+        });
+
+        picButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent newIntet = new Intent(Main2Activity.this, takePictureActivity.class);
+                startActivity(newIntet);
             }
         });
 
