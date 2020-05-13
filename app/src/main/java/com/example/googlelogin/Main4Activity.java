@@ -38,6 +38,7 @@ public class Main4Activity extends AppCompatActivity {
     private double avgOfDbArray = 0.0;
     private double referenceAmp = 10.0;
     private int dbArrayIterator;
+    Button exit;
 
     public boolean noiseSpike = false;
     String theChildID;
@@ -62,6 +63,7 @@ public class Main4Activity extends AppCompatActivity {
         mStatusView = (TextView)findViewById(R.id.status);
         dBAverage = (TextView)findViewById(R.id.average);
         spike = (TextView)findViewById(R.id.spike);
+        exit = findViewById(R.id.goHome);
 
         //get child id to notify user once noise event
         Bundle extras = getIntent().getExtras();
@@ -73,6 +75,18 @@ public class Main4Activity extends AppCompatActivity {
             Toast.makeText(Main4Activity.this, universal ,Toast.LENGTH_SHORT).show();
             Toast.makeText(Main4Activity.this, theChildID ,Toast.LENGTH_SHORT).show();
         }
+
+        exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent afterLogin = new Intent(Main4Activity.this, Main2Activity.class);
+                afterLogin.putExtra("key",theChildID);
+                afterLogin.putExtra("email", universal);
+                startActivity(afterLogin);
+            }
+        });
+
+
 
 
         //when click change text view and start and stop recording

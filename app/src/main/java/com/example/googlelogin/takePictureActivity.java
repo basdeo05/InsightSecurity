@@ -108,20 +108,6 @@ public class takePictureActivity extends AppCompatActivity {
             Toast.makeText(takePictureActivity.this, universal ,Toast.LENGTH_SHORT).show();
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         textureView = (TextureView) findViewById(R.id.textureView);
         assert textureView != null;
         textureView.setSurfaceTextureListener(textureListener);
@@ -134,6 +120,7 @@ public class takePictureActivity extends AppCompatActivity {
             }
         });
     }
+
     TextureView.SurfaceTextureListener textureListener = new TextureView.SurfaceTextureListener() {
         @Override
         public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
@@ -309,6 +296,7 @@ public class takePictureActivity extends AppCompatActivity {
                     // When the session is ready, we start displaying the preview.
                     cameraCaptureSessions = cameraCaptureSession;
                     updatePreview();
+                    takePicture();
                 }
                 @Override
                 public void onConfigureFailed(@NonNull CameraCaptureSession cameraCaptureSession) {
