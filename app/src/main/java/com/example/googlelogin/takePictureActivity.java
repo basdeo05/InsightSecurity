@@ -59,13 +59,14 @@ import java.util.UUID;
 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 public class takePictureActivity extends AppCompatActivity {
 
-//    private static final int PERMISSION_CODE = 1000;
+    //    private static final int PERMISSION_CODE = 1000;
 //    private static final int IMAGE_CAPTURE_CODE = 1001;
 //    Button mCaptureBtn;
 //    ImageView mImageView;
     Uri image_uri;
     String universal;
     String childID;
+    String thePath;
 
     private static final String TAG = "AndroidCameraApi";
     private Button takePictureButton;
@@ -93,6 +94,34 @@ public class takePictureActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_take_picture);
+
+
+
+
+        //get child id to notify user once noise event
+        Bundle extras = getIntent().getExtras();
+
+        if (extras != null) {
+            childID = extras.getString("key2");
+            universal = extras.getString("key3");
+            // make sure child id was grabbed and not null
+            Toast.makeText(takePictureActivity.this, universal ,Toast.LENGTH_SHORT).show();
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         textureView = (TextureView) findViewById(R.id.textureView);
         assert textureView != null;
         textureView.setSurfaceTextureListener(textureListener);
@@ -231,7 +260,18 @@ public class takePictureActivity extends AppCompatActivity {
                 public void onCaptureCompleted(CameraCaptureSession session, CaptureRequest request, TotalCaptureResult result) {
                     super.onCaptureCompleted(session, request, result);
                     Toast.makeText(takePictureActivity.this, "Saved:" + file, Toast.LENGTH_SHORT).show();
-                    createCameraPreview();
+                    //createCameraPreview();
+                    closeCamera();
+
+
+                    image_uri = Uri.fromFile(file);
+
+                    Intent viewerIntent = new Intent(takePictureActivity.this, Main3Activity.class);
+                    // pass the user id key in to camera page
+                    viewerIntent.putExtra("key2", image_uri.toString());
+                    viewerIntent.putExtra("key3", universal);
+                    viewerIntent.putExtra("key4",childID);
+                    startActivity(viewerIntent);
                 }
             };
             cameraDevice.createCaptureSession(outputSurfaces, new CameraCaptureSession.StateCallback() {
@@ -351,7 +391,7 @@ public class takePictureActivity extends AppCompatActivity {
 
 
 
-    public  static File getOutputMediaFile(){
+     public File getOutputMediaFile(){
         // To be safe, you should check that the SDCard is mounted
         // using Environment.getExternalStorageState() before doing this.
         if (!Environment.getExternalStorageState().equalsIgnoreCase(Environment.MEDIA_MOUNTED)) {
@@ -374,8 +414,11 @@ public class takePictureActivity extends AppCompatActivity {
         // Create a media file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(new Date());
         File mediaFile;
-            mediaFile = new File(mediaStorageDir.getPath() + File.separator +
+        mediaFile = new File(mediaStorageDir.getPath() + File.separator +
                     "IMG_"+ timeStamp + ".jpg");
+
+        thePath = mediaFile.getAbsolutePath();
+         Toast.makeText(this, thePath.toString(), Toast.LENGTH_SHORT).show();
 
         return mediaFile;
     }

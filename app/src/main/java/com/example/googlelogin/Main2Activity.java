@@ -114,6 +114,7 @@ public class Main2Activity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent newIntet = new Intent(Main2Activity.this, takePictureActivity.class);
                 newIntet.putExtra("key3",universal);
+                newIntet.putExtra("key2", theChildID);
                 startActivity(newIntet);
             }
         });
