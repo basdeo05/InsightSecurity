@@ -31,6 +31,9 @@ import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Main3Activity extends AppCompatActivity {
 
     //used to identify image request
@@ -44,6 +47,7 @@ public class Main3Activity extends AppCompatActivity {
     private Uri mImageUri;
     String universal;
     String childID;
+    String theTime;
 
 
 
@@ -70,6 +74,8 @@ public class Main3Activity extends AppCompatActivity {
             //Toast.makeText(Main3Activity.this, universal ,Toast.LENGTH_SHORT).show();
             //Toast.makeText(Main3Activity.this, mImageUri.toString() ,Toast.LENGTH_SHORT).show();
         }
+
+        theTime = new SimpleDateFormat("MM/dd/yyyy_HH:mm").format(new Date());
 
 
 
@@ -120,7 +126,7 @@ public class Main3Activity extends AppCompatActivity {
                             while (!urlTask.isSuccessful());
                             Uri downloadUrl = urlTask.getResult();
 
-                            Upload upload = new Upload(universal,downloadUrl.toString());
+                            Upload upload = new Upload(universal,downloadUrl.toString(), theTime);
 
                             String uploadId = mDatabaseRef.push().getKey();
                             mDatabaseRef.child(uploadId).setValue(upload);
