@@ -386,8 +386,12 @@ public class takePictureActivity extends AppCompatActivity {
             return  null;
         }
 
-        File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_PICTURES), "CameraSample");
+         // File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
+        //  Environment.DIRECTORY_PICTURES), "CameraSample");
+         File mediaStorageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+
+
+
         // This location works best if you want the created images to be shared
         // between applications and persist after your app has been uninstalled.
 
