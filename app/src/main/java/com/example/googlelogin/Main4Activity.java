@@ -5,6 +5,7 @@ import androidx.core.app.ActivityCompat;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -39,6 +40,7 @@ public class Main4Activity extends AppCompatActivity {
     private double referenceAmp = 10.0;
     private int dbArrayIterator;
     Button exit;
+    View thisView;
 
     public boolean noiseSpike = false;
     String theChildID;
@@ -64,6 +66,7 @@ public class Main4Activity extends AppCompatActivity {
         dBAverage = (TextView)findViewById(R.id.average);
         spike = (TextView)findViewById(R.id.spike);
         exit = findViewById(R.id.goHome);
+        thisView = findViewById(R.id.theView);
 
         //get child id to notify user once noise event
         Bundle extras = getIntent().getExtras();
@@ -71,9 +74,11 @@ public class Main4Activity extends AppCompatActivity {
         if (extras != null) {
             theChildID = extras.getString("key2");
             universal = extras.getString("key3");
-            // make sure child id was grabbed and not null
+/*
+            make sure child id was grabbed and not null
             Toast.makeText(Main4Activity.this, universal ,Toast.LENGTH_SHORT).show();
             Toast.makeText(Main4Activity.this, theChildID ,Toast.LENGTH_SHORT).show();
+*/
         }
 
         exit.setOnClickListener(new View.OnClickListener() {
@@ -104,6 +109,13 @@ public class Main4Activity extends AppCompatActivity {
                 if (camera.equals(value)){
                     theTitle.setText("Listening:");
                     theButton.setText("Stop Listening");
+                    thisView.setBackgroundColor(Color.BLACK);
+                    theTitle.setTextColor(Color.RED);
+                    theButton.setTextColor(Color.RED);
+                    mStatusView.setTextColor(Color.RED);
+                    dBAverage.setTextColor(Color.RED);
+                    spike.setTextColor(Color.RED);
+                    exit.setTextColor(Color.RED);
                     //call the on start method
                     onResume();
 
@@ -112,6 +124,13 @@ public class Main4Activity extends AppCompatActivity {
                 else {
                 theTitle.setText("Camera");
                 theButton.setText("Enter Camera Mode");
+                thisView.setBackgroundColor(Color.WHITE);
+                theTitle.setTextColor(Color.BLACK);
+                theButton.setTextColor(Color.BLACK);
+                mStatusView.setTextColor(Color.BLACK);
+                dBAverage.setTextColor(Color.BLACK);
+                spike.setTextColor(Color.BLACK);
+                exit.setTextColor(Color.BLACK);
                 //call the stop method
                     stopRecorder();
                 }

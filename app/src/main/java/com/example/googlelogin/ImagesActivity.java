@@ -39,7 +39,7 @@ public class ImagesActivity extends AppCompatActivity {
             theUserEmail = extras.getString("email");
         }
 
-        Toast.makeText(this, theUserEmail, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, theUserEmail, Toast.LENGTH_SHORT).show();
 
 
         mRecyclerView = findViewById(R.id.recycler_view);

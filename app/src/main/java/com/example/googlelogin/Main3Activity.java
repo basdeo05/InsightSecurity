@@ -67,8 +67,8 @@ public class Main3Activity extends AppCompatActivity {
             childID = extras.getString("key4");
 
             // make sure child id was grabbed and not null
-            Toast.makeText(Main3Activity.this, universal ,Toast.LENGTH_SHORT).show();
-            Toast.makeText(Main3Activity.this, mImageUri.toString() ,Toast.LENGTH_SHORT).show();
+            //Toast.makeText(Main3Activity.this, universal ,Toast.LENGTH_SHORT).show();
+            //Toast.makeText(Main3Activity.this, mImageUri.toString() ,Toast.LENGTH_SHORT).show();
         }
 
 
@@ -140,7 +140,7 @@ public class Main3Activity extends AppCompatActivity {
                         }
                     });
         } else {
-            Toast.makeText(this, "No file selected", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "No file selected", Toast.LENGTH_SHORT).show();
         }
     }
 

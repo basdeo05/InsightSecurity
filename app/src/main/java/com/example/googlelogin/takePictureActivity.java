@@ -105,7 +105,7 @@ public class takePictureActivity extends AppCompatActivity {
             childID = extras.getString("key2");
             universal = extras.getString("key3");
             // make sure child id was grabbed and not null
-            Toast.makeText(takePictureActivity.this, universal ,Toast.LENGTH_SHORT).show();
+            //Toast.makeText(takePictureActivity.this, universal ,Toast.LENGTH_SHORT).show();
         }
 
         textureView = (TextureView) findViewById(R.id.textureView);
@@ -161,7 +161,7 @@ public class takePictureActivity extends AppCompatActivity {
         @Override
         public void onCaptureCompleted(CameraCaptureSession session, CaptureRequest request, TotalCaptureResult result) {
             super.onCaptureCompleted(session, request, result);
-            Toast.makeText(takePictureActivity.this, "Saved:" + file, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(takePictureActivity.this, "Saved:" + file, Toast.LENGTH_SHORT).show();
             createCameraPreview();
         }
     };
@@ -406,7 +406,7 @@ public class takePictureActivity extends AppCompatActivity {
                     "IMG_"+ timeStamp + ".jpg");
 
         thePath = mediaFile.getAbsolutePath();
-         Toast.makeText(this, thePath.toString(), Toast.LENGTH_SHORT).show();
+         //Toast.makeText(this, thePath.toString(), Toast.LENGTH_SHORT).show();
 
         return mediaFile;
     }

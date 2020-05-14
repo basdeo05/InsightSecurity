@@ -163,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
             if (requestCode == RC_SIGN_IN) {
                 GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
                 int statusCode = result.getStatus().getStatusCode();
-                Toast.makeText(MainActivity.this, String.valueOf(statusCode), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MainActivity.this, String.valueOf(statusCode), Toast.LENGTH_SHORT).show();
                 Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
                 handleSignInResult(task );
             }
@@ -197,7 +197,7 @@ public class MainActivity extends AppCompatActivity {
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
-            Toast.makeText(MainActivity.this, "You Signed In", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(MainActivity.this, "You Signed In", Toast.LENGTH_SHORT).show();
             firebaseAuthWithGoogle (account);
         }
         catch (ApiException e) {
@@ -234,7 +234,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            Toast.makeText(MainActivity.this, "You Signed In", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(MainActivity.this, "You Signed In", Toast.LENGTH_SHORT).show();
                             FirebaseUser user = mAuth.getCurrentUser();
 
                             //add to database

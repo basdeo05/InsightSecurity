@@ -51,15 +51,9 @@ public class Main2Activity extends AppCompatActivity {
             universal = extras.getString("email");
         }
 
-        Toast.makeText(Main2Activity.this, universal ,Toast.LENGTH_SHORT).show();
-        Toast.makeText(Main2Activity.this, theChildID ,Toast.LENGTH_SHORT).show();
-
-
-
-
-
-
-
+        Toast.makeText(Main2Activity.this, "Welcome "+ universal ,Toast.LENGTH_SHORT).show();
+        Toast.makeText(Main2Activity.this, "Viewer -> View Your Security Images" ,Toast.LENGTH_LONG).show();
+        Toast.makeText(Main2Activity.this, "Camera -> Turn your device into a security system.", Toast.LENGTH_LONG).show();
 
 
         // Configure sign-in to request the user's ID, email address, and basic
@@ -135,12 +129,8 @@ public class Main2Activity extends AppCompatActivity {
                         break;
                     // ...
                 }
-
-
             }
         });
-
-
     }
 
 
@@ -157,9 +147,6 @@ public class Main2Activity extends AppCompatActivity {
         startActivity(viewerIntent);
 
     }
-
-
-
 
 }
 
