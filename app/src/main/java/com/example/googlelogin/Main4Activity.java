@@ -39,6 +39,7 @@ public class Main4Activity extends AppCompatActivity {
     private double avgOfDbArray = 0.0;
     private double referenceAmp = 10.0;
     private int dbArrayIterator;
+    private double lastNoiseLevel = 64.0;
     Button exit;
     View thisView;
 
@@ -222,7 +223,8 @@ public class Main4Activity extends AppCompatActivity {
     public void updateTv(){
         //mStatusView.setText(Double.toString((soundDb(referenceAmp))) + " dB");
         mStatusView.setText( "Current Level: " + String.format("%.1f", soundDb())+ " dB");
-        dBAverage.setText("Average:" + String.format("%.1f", avgOfDbArray)+ " dB");
+        dBAverage.setText("");
+        // dBAverage.setText("Average:" + String.format("%.1f", avgOfDbArray)+ " dB");
         checkForNoiseSpike();
         if (noiseSpike == true){
             spike.setText("Noise spike: true");
@@ -266,7 +268,7 @@ public class Main4Activity extends AppCompatActivity {
     }*/
 
     public void checkForNoiseSpike(){
-       if(soundDb() > 60.0){
+       if(soundDb() > 65.0 && soundDb() > lastNoiseLevel*1.65){
            noiseSpike = true;
            //get data base refrence using child id
            DatabaseReference theUserNoiseEventValue = FirebaseDatabase.getInstance().getReference("Users").child(theChildID).child("noiseEvent");
@@ -283,6 +285,8 @@ public class Main4Activity extends AppCompatActivity {
        } else {
            noiseSpike = false;
        }
+       // grab current level of noise for use calculating later noise events
+       lastNoiseLevel = soundDb();
     }
 
     public double getAmplitude() {
