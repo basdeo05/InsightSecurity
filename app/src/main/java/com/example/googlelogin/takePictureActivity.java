@@ -67,6 +67,7 @@ public class takePictureActivity extends AppCompatActivity {
     String universal;
     String childID;
     String thePath;
+    Boolean timer;
 
     private static final String TAG = "AndroidCameraApi";
     private Button takePictureButton;
@@ -104,6 +105,7 @@ public class takePictureActivity extends AppCompatActivity {
         if (extras != null) {
             childID = extras.getString("key2");
             universal = extras.getString("key3");
+            timer = extras.getBoolean("theTimer");
             // make sure child id was grabbed and not null
             //Toast.makeText(takePictureActivity.this, universal ,Toast.LENGTH_SHORT).show();
         }
@@ -258,6 +260,7 @@ public class takePictureActivity extends AppCompatActivity {
                     viewerIntent.putExtra("key2", image_uri.toString());
                     viewerIntent.putExtra("key3", universal);
                     viewerIntent.putExtra("key4",childID);
+                    viewerIntent.putExtra("theTimer",timer);
                     startActivity(viewerIntent);
                 }
             };

@@ -48,6 +48,7 @@ public class Main3Activity extends AppCompatActivity {
     String universal;
     String childID;
     String theTime;
+    Boolean timer;
 
 
 
@@ -69,6 +70,7 @@ public class Main3Activity extends AppCompatActivity {
             mImageUri = Uri.parse(extras.getString("key2"));
             universal = extras.getString("key3");
             childID = extras.getString("key4");
+            timer = extras.getBoolean("theTimer");
 
             // make sure child id was grabbed and not null
             //Toast.makeText(Main3Activity.this, universal ,Toast.LENGTH_SHORT).show();
@@ -158,6 +160,7 @@ public class Main3Activity extends AppCompatActivity {
         // pass the user id key in to camera page
         viewerIntent.putExtra("key2",childID);
         viewerIntent.putExtra("key3", universal);
+        viewerIntent.putExtra("theTimer",timer);
         startActivity(viewerIntent);
 
     }

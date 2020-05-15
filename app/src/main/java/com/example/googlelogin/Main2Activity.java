@@ -33,6 +33,7 @@ public class Main2Activity extends AppCompatActivity {
     //child ID to delete user from database once they sign out
     String theChildID;
     String universal;
+    Boolean timer = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +69,6 @@ public class Main2Activity extends AppCompatActivity {
 
 
 
-
         //When user wants to be A viewer Will open Viewer Activity
         viewButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,6 +96,7 @@ public class Main2Activity extends AppCompatActivity {
                 // pass the user id key in to camera page
                 viewerIntent.putExtra("key2",theChildID);
                 viewerIntent.putExtra("key3",universal);
+                viewerIntent.putExtra("theTimer",timer);
                 startActivity(viewerIntent);
 
 
@@ -109,6 +110,7 @@ public class Main2Activity extends AppCompatActivity {
                 Intent newIntet = new Intent(Main2Activity.this, takePictureActivity.class);
                 newIntet.putExtra("key3",universal);
                 newIntet.putExtra("key2", theChildID);
+                newIntet.putExtra("theTimer",timer);
                 startActivity(newIntet);
             }
         });

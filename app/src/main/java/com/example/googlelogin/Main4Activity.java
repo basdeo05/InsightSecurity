@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -42,6 +43,9 @@ public class Main4Activity extends AppCompatActivity {
     private double lastNoiseLevel = 64.0;
     Button exit;
     View thisView;
+    Boolean timer;
+    Button startTheTimer;
+    public int counter = 0;
 
     public boolean noiseSpike = false;
     String theChildID;
@@ -68,6 +72,7 @@ public class Main4Activity extends AppCompatActivity {
         spike = (TextView)findViewById(R.id.spike);
         exit = findViewById(R.id.goHome);
         thisView = findViewById(R.id.theView);
+        startTheTimer = findViewById(R.id.startTimer);
 
         //get child id to notify user once noise event
         Bundle extras = getIntent().getExtras();
@@ -75,12 +80,49 @@ public class Main4Activity extends AppCompatActivity {
         if (extras != null) {
             theChildID = extras.getString("key2");
             universal = extras.getString("key3");
+            timer = extras.getBoolean("theTimer");
 /*
             make sure child id was grabbed and not null
             Toast.makeText(Main4Activity.this, universal ,Toast.LENGTH_SHORT).show();
             Toast.makeText(Main4Activity.this, theChildID ,Toast.LENGTH_SHORT).show();
 */
         }
+
+
+        if (timer == true){
+            startTheTimer.setText("Stop Timer");
+            changeColorRed();
+
+        }
+        else {
+            startTheTimer.setText("Start Timer");
+            changeColorBlack();
+        }
+
+
+
+        startTheTimer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (timer == true){
+                    timer = false;
+                    startTheTimer.setText("Start Timer");
+                    changeColorBlack();
+
+                }
+                else {
+                    timer = true;
+                    startTheTimer.setText("Stop Timer");
+                    changeColorRed();
+                }
+
+                timerConfig();
+            }
+        });
+
+        timerConfig();
+
+
 
         exit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,13 +152,7 @@ public class Main4Activity extends AppCompatActivity {
                 if (camera.equals(value)){
                     theTitle.setText("Listening:");
                     theButton.setText("Stop Listening");
-                    thisView.setBackgroundColor(Color.BLACK);
-                    theTitle.setTextColor(Color.RED);
-                    theButton.setTextColor(Color.RED);
-                    mStatusView.setTextColor(Color.RED);
-                    dBAverage.setTextColor(Color.RED);
-                    spike.setTextColor(Color.RED);
-                    exit.setTextColor(Color.RED);
+                    changeColorRed();
                     //call the on start method
                     onResume();
 
@@ -125,13 +161,7 @@ public class Main4Activity extends AppCompatActivity {
                 else {
                 theTitle.setText("Camera");
                 theButton.setText("Enter Camera Mode");
-                thisView.setBackgroundColor(Color.WHITE);
-                theTitle.setTextColor(Color.BLACK);
-                theButton.setTextColor(Color.BLACK);
-                mStatusView.setTextColor(Color.BLACK);
-                dBAverage.setTextColor(Color.BLACK);
-                spike.setTextColor(Color.BLACK);
-                exit.setTextColor(Color.BLACK);
+                changeColorBlack();
                 //call the stop method
                     stopRecorder();
                 }
@@ -279,6 +309,7 @@ public class Main4Activity extends AppCompatActivity {
            // pass the user id key in to camera page
            viewerIntent.putExtra("key2",theChildID);
            viewerIntent.putExtra("key3",universal);
+           viewerIntent.putExtra("theTimer",timer);
            startActivity(viewerIntent);
 
 
@@ -296,6 +327,58 @@ public class Main4Activity extends AppCompatActivity {
             return 0;
 
     }
+
+    void timerConfig (){
+        if(timer == true){
+
+            new CountDownTimer(30000, 1000){
+                public void onTick(long millisUntilFinished){
+                    mStatusView.setText(String.valueOf(counter));
+                    counter++;
+                }
+                public  void onFinish(){
+
+                    Intent viewerIntent = new Intent(Main4Activity.this, takePictureActivity.class);
+                    // pass the user id key in to camera page
+                    viewerIntent.putExtra("key2",theChildID);
+                    viewerIntent.putExtra("key3",universal);
+                    viewerIntent.putExtra("theTimer",timer);
+                    startActivity(viewerIntent);
+
+                }
+            }.start();
+
+        }
+    }
+
+
+
+    void changeColorBlack (){
+
+        thisView.setBackgroundColor(Color.WHITE);
+        theTitle.setTextColor(Color.BLACK);
+        theButton.setTextColor(Color.BLACK);
+        mStatusView.setTextColor(Color.BLACK);
+        dBAverage.setTextColor(Color.BLACK);
+        spike.setTextColor(Color.BLACK);
+        exit.setTextColor(Color.BLACK);
+        startTheTimer.setTextColor(Color.BLACK);
+
+    }
+
+    void changeColorRed (){
+
+        thisView.setBackgroundColor(Color.BLACK);
+        theTitle.setTextColor(Color.RED);
+        theButton.setTextColor(Color.RED);
+        mStatusView.setTextColor(Color.RED);
+        dBAverage.setTextColor(Color.RED);
+        spike.setTextColor(Color.RED);
+        exit.setTextColor(Color.RED);
+        startTheTimer.setTextColor(Color.RED);
+
+    }
+
 
 }
 
