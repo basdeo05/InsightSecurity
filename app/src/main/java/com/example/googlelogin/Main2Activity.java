@@ -1,30 +1,21 @@
 package com.example.googlelogin;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.io.Serializable;
 
 public class Main2Activity extends AppCompatActivity {
 
@@ -44,6 +35,7 @@ public class Main2Activity extends AppCompatActivity {
         camButton = findViewById(R.id.theCamera);
         signOut = findViewById(R.id.signOut);
         picButton = findViewById(R.id.pictureButton);
+        timer = false;
 
         //get child id to delete user from database once signed out
         Bundle extras = getIntent().getExtras();
@@ -52,9 +44,6 @@ public class Main2Activity extends AppCompatActivity {
             universal = extras.getString("email");
         }
 
-        Toast.makeText(Main2Activity.this, "Welcome "+ universal ,Toast.LENGTH_SHORT).show();
-        Toast.makeText(Main2Activity.this, "Viewer -> View Your Security Images" ,Toast.LENGTH_LONG).show();
-        Toast.makeText(Main2Activity.this, "Camera -> Turn your device into a security system.", Toast.LENGTH_LONG).show();
 
 
         // Configure sign-in to request the user's ID, email address, and basic
@@ -67,6 +56,29 @@ public class Main2Activity extends AppCompatActivity {
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
 
+        AlertDialog willUseForGood = new AlertDialog.Builder(Main2Activity.this)
+                .setTitle("I Will Use This App For Security Purposes")
+
+                // Specifying a listener allows you to take an action before dismissing the dialog.
+                // The dialog is automatically dismissed when a dialog button is clicked.
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Continue with delete operation
+                        Toast.makeText(Main2Activity.this, "Welcome "+ universal ,Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Main2Activity.this, "Viewer -> View Your Security Images" ,Toast.LENGTH_LONG).show();
+                        Toast.makeText(Main2Activity.this, "Camera -> Turn your device into a security system.", Toast.LENGTH_LONG).show();
+                        timer = false;
+                    }
+                })
+
+                // A null listener allows the button to dismiss the dialog and take no further action.
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        signOut();
+                    }
+                })
+                .show();
 
 
         //When user wants to be A viewer Will open Viewer Activity
