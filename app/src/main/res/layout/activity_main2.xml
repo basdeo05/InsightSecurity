@@ -4,48 +4,57 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#D0000000"
     tools:context=".Main2Activity">
 
     <Button
         android:id="@+id/theViewer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="231dp"
+        android:layout_height="55dp"
+        android:fontFamily="sans-serif-light"
         android:text="I Want To Be A Viewer"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.411" />
+        app:layout_constraintVertical_bias="0.353" />
 
     <Button
         android:id="@+id/theCamera"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="231dp"
+        android:layout_height="58dp"
+        android:fontFamily="sans-serif-light"
         android:text="I Want To Be A Camera"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.47"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/theViewer"
-        app:layout_constraintVertical_bias="0.184" />
+        app:layout_constraintVertical_bias="0.044" />
 
     <Button
         android:id="@+id/signOut"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-light"
         android:text="Sign Out"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/theCamera" />
+        app:layout_constraintTop_toBottomOf="@+id/theCamera"
+        app:layout_constraintVertical_bias="0.419" />
 
     <Button
         android:id="@+id/pictureButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Take Picture"
+        android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/theViewer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.613" />
 </androidx.constraintlayout.widget.ConstraintLayout>

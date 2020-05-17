@@ -57,7 +57,7 @@ public class Main2Activity extends AppCompatActivity {
 
 
         AlertDialog willUseForGood = new AlertDialog.Builder(Main2Activity.this)
-                .setTitle("I Will Use This App For Security Purposes")
+                .setTitle("I will use this app for security purposes")
 
                 // Specifying a listener allows you to take an action before dismissing the dialog.
                 // The dialog is automatically dismissed when a dialog button is clicked.

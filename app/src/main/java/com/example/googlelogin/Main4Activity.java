@@ -36,10 +36,9 @@ public class Main4Activity extends AppCompatActivity {
     private TextView dBAverage;
     private TextView spike;
     private final int SIZE_OF_DB_ARRAY = 300; //300 is to test for a minute //1500; // For recording 5 times a second * 60 seconds * 5 minutes
-    private double[] dbArray = new double[SIZE_OF_DB_ARRAY];
-    private double avgOfDbArray = 0.0;
+ /*   private double[] dbArray = new double[SIZE_OF_DB_ARRAY];
+    private double avgOfDbArray = 0.0;*/
     private double referenceAmp = 10.0;
-    private int dbArrayIterator;
     private double lastNoiseLevel = 64.0;
     Button exit;
     View thisView;
@@ -262,20 +261,17 @@ public class Main4Activity extends AppCompatActivity {
         else spike.setText("Noise spike: false");
     }
 
-  /*  public double soundDb(double ampl){
-        return  20 * Math.log10(getAmplitude() / ampl);
-    }*/
 
     public double soundDb(){
         return  20 * Math.log10(getAmplitude() / referenceAmp);
     }
 
-    public int setDbAverage(){
+  /*  public int setDbAverage(){
         int itr = 0;
         double total = 0.0;
 
         if(soundDb() > 0) { //since the app says the dB level is -infinity when it first runs
-            for (/*itr = 0*/; itr < dbArray.length; itr++) {
+            for (*//*itr = 0*//*; itr < dbArray.length; itr++) {
                 dbArray[itr] = soundDb();
                 total += dbArray[itr];
             }
@@ -286,21 +282,13 @@ public class Main4Activity extends AppCompatActivity {
         }
 
         return itr;
-    }
-
-/*    public void checkForNoiseSpike(){
-        dbArrayIterator= setDbAverage();
-        if ( (dbArrayIterator == dbArray.length-1) && (soundDb() > avgOfDbArray)){
-            //trigger noise event
-            noiseSpike = true;
-            //reset the boolean after sending a notification
-        }
     }*/
+
 
     public void checkForNoiseSpike(){
        if(soundDb() > 65.0 && soundDb() > lastNoiseLevel*1.65){
            noiseSpike = true;
-           //get data base refrence using child id
+           //get data base reference using child id
            DatabaseReference theUserNoiseEventValue = FirebaseDatabase.getInstance().getReference("Users").child(theChildID).child("noiseEvent");
            //update child from database
            theUserNoiseEventValue.setValue(true);
@@ -355,14 +343,14 @@ public class Main4Activity extends AppCompatActivity {
 
     void changeColorBlack (){
 
-        thisView.setBackgroundColor(Color.WHITE);
-        theTitle.setTextColor(Color.BLACK);
+        //thisView.setBackgroundColor(Color.WHITE);
+        //theTitle.setTextColor(Color.BLACK);
         theButton.setTextColor(Color.BLACK);
-        mStatusView.setTextColor(Color.BLACK);
-        dBAverage.setTextColor(Color.BLACK);
-        spike.setTextColor(Color.BLACK);
-        exit.setTextColor(Color.BLACK);
-        startTheTimer.setTextColor(Color.BLACK);
+        //mStatusView.setTextColor(Color.BLACK);
+        //dBAverage.setTextColor(Color.BLACK);
+        //spike.setTextColor(Color.BLACK);
+        //exit.setTextColor(Color.BLACK);
+        //startTheTimer.setTextColor(Color.BLACK);
 
     }
 

@@ -5,15 +5,18 @@
     android:id="@+id/theView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#D0000000"
     tools:context=".Main4Activity">
 
     <TextView
         android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="Camera"
-        android:textColor="@android:color/holo_blue_dark"
+        android:layout_width="255dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="60dp"
+        android:fontFamily="sans-serif-light"
+        android:text="Camera Mode"
+        android:textAlignment="center"
+        android:textColor="#F7F9FA"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,23 +24,23 @@
 
     <Button
         android:id="@+id/theButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="64dp"
+        android:layout_width="85dp"
+        android:layout_height="26dp"
         android:text="Enter Camera Mode"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/status"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/status"
         android:layout_width="253dp"
         android:layout_height="51dp"
         android:layout_marginTop="266dp"
+        android:fontFamily="sans-serif-light"
         android:text="TextView"
         android:textAlignment="center"
-        android:textColor="@color/common_google_signin_btn_text_dark_focused"
+        android:textColor="#FFFFFF"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -50,44 +53,58 @@
         android:layout_height="47dp"
         android:layout_marginTop="183dp"
         android:layout_marginBottom="71dp"
+        android:fontFamily="sans-serif-light"
         android:text="TextView"
         android:textAlignment="center"
-        android:textColor="@color/common_google_signin_btn_text_dark_focused"
+        android:textColor="#FFFFFF"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/theButton"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title" />
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/spike"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="31dp"
         android:layout_marginTop="82dp"
+        android:fontFamily="sans-serif-light"
         android:text="TextView"
+        android:textAlignment="center"
+        android:textColor="#DDDDDD"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/average"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title" />
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        app:layout_constraintVertical_bias="0.029" />
 
     <Button
         android:id="@+id/goHome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="112dp"
+        android:layout_height="49dp"
+        android:fontFamily="sans-serif-light"
         android:text="Home"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/status" />
+        app:layout_constraintTop_toBottomOf="@+id/status"
+        app:layout_constraintVertical_bias="0.476" />
 
     <Button
         android:id="@+id/startTimer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="22dp"
+        android:layout_width="199dp"
+        android:layout_height="46dp"
+        android:fontFamily="sans-serif-light"
         android:text="Enter Timer Mode"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/status"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/theButton" />
+        app:layout_constraintTop_toTopOf="@+id/average"
+        app:layout_constraintVertical_bias="0.096" />
 </androidx.constraintlayout.widget.ConstraintLayout>
