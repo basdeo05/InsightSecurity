@@ -35,9 +35,6 @@ public class Main4Activity extends AppCompatActivity {
     private Thread runner;
     private TextView dBAverage;
     private TextView spike;
-    private final int SIZE_OF_DB_ARRAY = 300; //300 is to test for a minute //1500; // For recording 5 times a second * 60 seconds * 5 minutes
- /*   private double[] dbArray = new double[SIZE_OF_DB_ARRAY];
-    private double avgOfDbArray = 0.0;*/
     private double referenceAmp = 10.0;
     private double lastNoiseLevel = 64.0;
     Button exit;
@@ -265,24 +262,6 @@ public class Main4Activity extends AppCompatActivity {
     public double soundDb(){
         return  20 * Math.log10(getAmplitude() / referenceAmp);
     }
-
-  /*  public int setDbAverage(){
-        int itr = 0;
-        double total = 0.0;
-
-        if(soundDb() > 0) { //since the app says the dB level is -infinity when it first runs
-            for (*//*itr = 0*//*; itr < dbArray.length; itr++) {
-                dbArray[itr] = soundDb();
-                total += dbArray[itr];
-            }
-        }
-
-        if (itr == dbArray.length-1) {
-            avgOfDbArray = total / dbArray.length;
-        }
-
-        return itr;
-    }*/
 
 
     public void checkForNoiseSpike(){
