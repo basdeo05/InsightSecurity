@@ -58,6 +58,7 @@ public class Main2Activity extends AppCompatActivity {
 
         AlertDialog willUseForGood = new AlertDialog.Builder(Main2Activity.this)
                 .setTitle("I will use this app for security purposes")
+                .setMessage("Please agree that you will not use Insight Security for any illegal purpose. You are responsible for obeying the laws and privacy protection requirements of your region.")
 
                 // Specifying a listener allows you to take an action before dismissing the dialog.
                 // The dialog is automatically dismissed when a dialog button is clicked.
