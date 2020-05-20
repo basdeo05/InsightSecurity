@@ -1,5 +1,7 @@
 package com.example.googlelogin;
 
+//Upload class that defines how pictures will be uploaded to the database. name (userEmail), image, timeStamp
+
 public class Upload {
 
     private String mName;

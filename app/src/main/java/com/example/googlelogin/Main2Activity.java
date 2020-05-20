@@ -17,6 +17,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+
+//User chooses to be a camera or viewer. Passes email to viewer view. Passes database childId and email to camera view.
+
 public class Main2Activity extends AppCompatActivity {
 
     Button viewButton, camButton, signOut, picButton;
@@ -56,6 +59,7 @@ public class Main2Activity extends AppCompatActivity {
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
 
+        //agreement to user app correctly for sercurity purposes alert
         AlertDialog willUseForGood = new AlertDialog.Builder(Main2Activity.this)
                 .setTitle("I will use this app for security purposes")
                 .setMessage("Please agree that you will not use Insight Security for any illegal purpose. You are responsible for obeying the laws and privacy protection requirements of your region.")
@@ -117,6 +121,8 @@ public class Main2Activity extends AppCompatActivity {
             }
         });
 
+        //take picture button with a trigger
+        //for testing on emulator purposes
         picButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

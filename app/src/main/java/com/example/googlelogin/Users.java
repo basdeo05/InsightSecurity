@@ -1,5 +1,7 @@
 package com.example.googlelogin;
 
+// Users: User Class that defines how users will be added to the database. Name, Email, notified, userName, notfication token
+
 public class Users {
 
     String userEmail;

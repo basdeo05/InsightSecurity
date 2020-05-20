@@ -18,7 +18,10 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
-
+//Youtube tutorial help
+//https://www.youtube.com/playlist?list=PLrnPJCHvNZuB_7nB5QD-4bNg6tpdEUImQ
+//Take email passed from Main Activity2. Load pictures from database that have same email passed to this view.
+// Displays images and time picture was taken.
 public class ImagesActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
@@ -61,10 +64,6 @@ public class ImagesActivity extends AppCompatActivity {
                     if (upload.getName().equals(theUserEmail)){
                         mUploads.add(upload);
                     }
-
-
-
-
                 }
 
                 mAdapter = new ImageAdapter(ImagesActivity.this, mUploads);
@@ -79,8 +78,5 @@ public class ImagesActivity extends AppCompatActivity {
                 mProgressCircle.setVisibility(View.INVISIBLE);
             }
         });
-
-
-
     }
 }

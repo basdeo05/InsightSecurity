@@ -24,6 +24,9 @@ import android.util.Log;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+// Camera mode activity. As soon you get to this view start listeing for decibels.
+// User can choose timer mode as well. Whichever event happens first will be sent to take picture activity.
+// Trigger noiseEvent to true with child ID passed to this view. So notification can be sent to all phones.
 
 public class Main4Activity extends AppCompatActivity {
 

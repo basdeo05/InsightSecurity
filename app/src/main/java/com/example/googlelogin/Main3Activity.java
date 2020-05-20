@@ -34,13 +34,17 @@ import com.squareup.picasso.Picasso;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+// Takes picture taken by camera and upload to database using upload class configurations.
+// After upload is completed takes you back to camera mode and start listening and starts timer if timer mode was chosen.
+//Youtube tutorial help
+//https://www.youtube.com/playlist?list=PLrnPJCHvNZuB_7nB5QD-4bNg6tpdEUImQ
 public class Main3Activity extends AppCompatActivity {
 
     //used to identify image request
     private static  final int PICK_IMAGE_REQUEST = 1;
 
 
-
+    //display preview
     private ImageView mImageView;
     private ProgressBar mProgressBar;
 
@@ -77,18 +81,16 @@ public class Main3Activity extends AppCompatActivity {
             //Toast.makeText(Main3Activity.this, mImageUri.toString() ,Toast.LENGTH_SHORT).show();
         }
 
+        //wanted hour min and seconds of this upload
         theTime = new SimpleDateFormat("MM/dd/yyyy_HH:mm").format(new Date());
-
-
-
-
-
 
         mImageView = findViewById(R.id.image_view);
         mProgressBar = findViewById(R.id.progress_bar);
 
 
+        //upload images to storage
         mStorageRef = FirebaseStorage.getInstance().getReference("uploads");
+        //upload url to firebase
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("uploads");
 
         Picasso.with(this).load(mImageUri).into(mImageView);
@@ -152,8 +154,7 @@ public class Main3Activity extends AppCompatActivity {
         }
     }
 
-
-
+    //after picture is taken go to camera mode to start listening again.
     private void openImagesActivity() {
 
         Intent viewerIntent = new Intent(this, Main4Activity.class);

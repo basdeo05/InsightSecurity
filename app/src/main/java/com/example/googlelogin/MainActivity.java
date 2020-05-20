@@ -32,11 +32,15 @@ import com.google.firebase.iid.InstanceIdResult;
 
 import java.io.Serializable;
 
+
+// Sign in with google authentication configuration. Grabbing user information after sign in to pass to different views.
+//Tutorial Helps
+//https://www.youtube.com/watch?v=2PIaGpJMCNs&t=1305s
+//https://www.youtube.com/watch?v=uPg1ydmnzpk
+//https://www.youtube.com/watch?v=lQChsNFeAMc
+//https://www.youtube.com/watch?v=E1eqRNTZqDM
+
 public class MainActivity extends AppCompatActivity {
-
-
-
-
 
     //Variables
      private SignInButton signin;
@@ -53,16 +57,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
-
-
-
-
-
-
-
-
-
     //On create method
     //Do this once app is created
     //First thing will be done
@@ -76,26 +70,12 @@ public class MainActivity extends AppCompatActivity {
     //database reference
         databaseUsers = FirebaseDatabase.getInstance().getReference("Users");
 
-
-
-
-
         //sign in button
         //when sign in button is clicked
         signin= findViewById(R.id.sign_in_button);
 
-
-
-
-
         //Fire Base Authenticaiton
         mAuth = FirebaseAuth.getInstance();
-
-
-
-
-
-
 
 
         // Configure Google Sign In
@@ -105,20 +85,8 @@ public class MainActivity extends AppCompatActivity {
                 .build();
 
 
-
-
-
-
-
-
         // Build a GoogleSignInClient with the options specified by gso.
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-
-
-
-
-
-
 
 
         //when clicked open new view
@@ -132,13 +100,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
-
-
-
-
-
-
 
 
     //Functions that will be called
@@ -175,24 +136,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     //when sign in go into new screen
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
@@ -205,22 +148,6 @@ public class MainActivity extends AppCompatActivity {
             //firebaseAuthWithGoogle (null);
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

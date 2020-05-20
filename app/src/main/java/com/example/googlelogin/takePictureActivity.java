@@ -55,6 +55,14 @@ import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
 
+//Open camera, create preview and take picture.
+//Learned from
+//https://android.jlelse.eu/the-least-you-can-do-with-camera2-api-2971c8c81b8b
+//https://androidpedia.net/en/tutorial/619/camera-2-api
+//https://inducesmile.com/android/android-camera2-api-example-tutorial/
+//https://www.youtube.com/watch?v=oPu42I0HSi4
+//https://www.youtube.com/watch?v=u5PDdg1G4Q4
+//https://www.youtube.com/watch?v=LpL9akTG4hI
 
 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 public class takePictureActivity extends AppCompatActivity {
@@ -356,7 +364,7 @@ public class takePictureActivity extends AppCompatActivity {
         if (requestCode == REQUEST_CAMERA_PERMISSION) {
             if (grantResults[0] == PackageManager.PERMISSION_DENIED) {
                 // close the app
-                Toast.makeText(takePictureActivity.this, "Sorry!!!, you can't use this app without granting permission", Toast.LENGTH_LONG).show();
+                Toast.makeText(takePictureActivity.this, "Need Permission", Toast.LENGTH_LONG).show();
                 finish();
             }
         }
@@ -383,8 +391,8 @@ public class takePictureActivity extends AppCompatActivity {
 
 
      public File getOutputMediaFile(){
-        // To be safe, you should check that the SDCard is mounted
-        // using Environment.getExternalStorageState() before doing this.
+        // check that the SDCard is mounted
+        // using Environment.getExternalStorageState()
         if (!Environment.getExternalStorageState().equalsIgnoreCase(Environment.MEDIA_MOUNTED)) {
             return  null;
         }
@@ -393,10 +401,6 @@ public class takePictureActivity extends AppCompatActivity {
         //  Environment.DIRECTORY_PICTURES), "CameraSample");
          File mediaStorageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
 
-
-
-        // This location works best if you want the created images to be shared
-        // between applications and persist after your app has been uninstalled.
 
         // Create the storage directory if it does not exist
         if (! mediaStorageDir.exists()){
@@ -417,7 +421,6 @@ public class takePictureActivity extends AppCompatActivity {
 
         return mediaFile;
     }
-
 }
 
 
